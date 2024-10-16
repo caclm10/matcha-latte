@@ -38,7 +38,9 @@ const isLastStep = +step === steps[steps.length - 1].number;
 
     <div class="flex justify-center">
         <a
-            href={isLastStep ? "/" : `/steps/${+step + 1}`}
+            href={isLastStep
+                ? "/matcha-latte"
+                : `/matcha-latte/steps/${+step + 1}`}
             class={button()}
             transition:name="action-button"
         >

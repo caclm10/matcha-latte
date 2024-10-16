@@ -37,7 +37,7 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
                         />
 
                         <a
-                            href={`/ingredients/${ingredient.id}`}
+                            href={`/matcha-latte/ingredients/${ingredient.id}`}
                             class="absolute inset-0"
                         >
                             <span class="sr-only">{ingredient.name}</span>
@@ -50,7 +50,7 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
 
     <div class="flex justify-end">
         <a
-            href="/steps/1"
+            href="/matcha-latte/steps/1"
             class={button()}
             data-aos="fade-right"
             data-aos-delay={ingredients.length * 500 + 500}
