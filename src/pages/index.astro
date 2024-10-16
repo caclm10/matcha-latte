@@ -1,0 +1,30 @@
+---
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+
+import { button } from "@/components/variants";
+---
+
+<DefaultLayout>
+    <h1 class="text-5xl font-medium text-center font-nanum">
+        Ayo buat Matcha Latte!
+    </h1>
+
+    <div class="flex justify-center">
+        <a href="/ingredients" class={button()} transition:name="ingredients">
+            <span>Lihat bahan-bahan</span>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+                ><path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 12h14m-7-7l7 7l-7 7"></path></svg
+            >
+        </a>
+    </div>
+</DefaultLayout>

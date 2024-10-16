@@ -1,0 +1,117 @@
+---
+import { ViewTransitions } from "astro:transitions";
+
+import "aos/dist/aos.css";
+---
+
+<style>
+    .bg {
+        background: rgb(205, 205, 205);
+        background: -moz-linear-gradient(
+            176deg,
+            rgba(205, 205, 205, 1) 0%,
+            rgba(154, 217, 147, 1) 100%
+        );
+        background: -webkit-linear-gradient(
+            176deg,
+            rgba(205, 205, 205, 1) 0%,
+            rgba(154, 217, 147, 1) 100%
+        );
+        background: linear-gradient(
+            176deg,
+            rgba(205, 205, 205, 1) 0%,
+            rgba(154, 217, 147, 1) 100%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#cdcdcd",endColorstr="#9ad993",GradientType=1);
+    }
+</style>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Matcha Latte</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <ViewTransitions />
+    </head>
+    <body
+        class="bg min-h-dvh flex items-center antialiased font-gaegu text-primary"
+    >
+        <div class="container max-w-3xl space-y-6">
+            <slot />
+        </div>
+    </body>
+</html>
+
+<script>
+    import AOS from "aos";
+
+    AOS.init({ once: true });
+</script>
+
+<script>
+    import confetti from "canvas-confetti";
+
+    var count = 200;
+    var defaults = {
+        origin: { y: 0.7 },
+    };
+
+    function fire(particleRatio = 1, opts: confetti.Options = {}) {
+        confetti({
+            ...defaults,
+            ...opts,
+            particleCount: Math.floor(count * particleRatio),
+        });
+    }
+
+    function runConfetti() {
+        const shouldShow = !!document.querySelector(`[data-confetti=true]`);
+        if (shouldShow) {
+            setTimeout(() => {
+                fire(0.25, {
+                    spread: 26,
+                    startVelocity: 55,
+                });
+                fire(0.2, {
+                    spread: 60,
+                });
+                fire(0.35, {
+                    spread: 100,
+                    decay: 0.91,
+                    scalar: 0.8,
+                });
+                fire(0.1, {
+                    spread: 120,
+                    startVelocity: 25,
+                    decay: 0.92,
+                    scalar: 1.2,
+                });
+                fire(0.1, {
+                    spread: 120,
+                    startVelocity: 45,
+                });
+            }, 10);
+        }
+    }
+
+    runConfetti();
+
+    document.addEventListener("astro:after-swap", () => {
+        runConfetti();
+    });
+</script>
+

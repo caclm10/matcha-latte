@@ -1,0 +1,67 @@
+---
+import { button } from "@/components/variants";
+import { steps } from "@/data";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+import { Image } from "astro:assets";
+
+export function getStaticPaths() {
+    return steps.map((step) => ({ params: { step: `${step.number}` } }));
+}
+
+const { step } = Astro.params;
+
+const stepItem = steps.find((_step) => _step.number === +step)!;
+
+const isLastStep = +step === steps[steps.length - 1].number;
+---
+
+<DefaultLayout>
+    <div
+        class="flex items-center justify-center"
+        transition:name="images"
+        data-confetti={isLastStep.toString()}
+    >
+        <Image
+            src={stepItem.image}
+            alt={stepItem.imageAlt}
+            class="w-full max-w-[275px] aspect-square object-cover rounded-xl ring ring-primary"
+        />
+    </div>
+
+    <div class="text-primary text-2xl">
+        <div class="flex justify-center items-start gap-x-3">
+            <span>{step}.</span>
+
+            <p>{stepItem.description}</p>
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <a
+            href={isLastStep ? "/" : `/steps/${+step + 1}`}
+            class={button()}
+            transition:name="action-button"
+        >
+            <span>{isLastStep ? "Mulai dari awal lagi" : "Lanjut"}</span>
+            {
+                !isLastStep && (
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 12h14m-7-7l7 7l-7 7"
+                        />
+                    </svg>
+                )
+            }
+        </a>
+    </div>
+</DefaultLayout>

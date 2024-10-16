@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+
+import { ingredients } from "@/data";
+import { button } from "@/components/variants";
+import DefaultLayout from "@/layouts/DefaultLayout.astro";
+
+export function getStaticPaths() {
+    return ingredients.map((ingredient) => ({
+        params: { ingredient: `${ingredient.id}` },
+    }));
+}
+
+const { ingredient: id } = Astro.params;
+
+const ingredient = ingredients.find((_ingredient) => _ingredient.id === id)!;
+---
+
+<DefaultLayout>
+    <div>
+        <a href="/ingredients?visited=1" class={button()}>
+            <span>Back</span>
+        </a>
+    </div>
+    <div class="flex items-center justify-center">
+        <Image
+            src={ingredient.image}
+            alt={ingredient.imageAlt}
+            class="w-full max-w-[275px] aspect-square object-cover rounded-xl ring ring-primary"
+            transition:name={`ingredient-image-${ingredient.id}`}
+        />
+    </div>
+
+    <div class="text-primary text-center text-2xl">
+        <p>{ingredient.name}</p>
+    </div>
+</DefaultLayout>
