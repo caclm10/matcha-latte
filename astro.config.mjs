@@ -7,5 +7,9 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
     site: 'https://caclm10.github.io',
     base: '/matcha-latte',
+    prefetch: {
+        defaultStrategy: 'load',
+        prefetchAll: true
+    },
     integrations: [tailwind()]
 });
