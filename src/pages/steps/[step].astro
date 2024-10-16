@@ -15,7 +15,7 @@ const stepItem = steps.find((_step) => _step.number === +step)!;
 const isLastStep = +step === steps[steps.length - 1].number;
 ---
 
-<DefaultLayout>
+<DefaultLayout transition="slide">
     <div
         class="flex items-center justify-center"
         transition:name="images"
@@ -44,7 +44,7 @@ const isLastStep = +step === steps[steps.length - 1].number;
             class={button()}
             transition:name="action-button"
         >
-            <span>{isLastStep ? "Mulai dari awal lagi" : "Lanjut"}</span>
+            <span>{isLastStep ? "Mulai dari awal" : "Lanjut"}</span>
             {
                 !isLastStep && (
                     <svg

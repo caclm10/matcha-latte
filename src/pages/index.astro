@@ -4,8 +4,11 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
 import { button } from "@/components/variants";
 ---
 
-<DefaultLayout>
-    <h1 class="text-5xl font-medium text-center font-nanum">
+<DefaultLayout transition="fade">
+    <h1
+        class="text-5xl font-medium text-center font-nanum"
+        transition:name="images"
+    >
         Ayo buat Matcha Latte!
     </h1>
 

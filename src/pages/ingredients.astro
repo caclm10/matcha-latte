@@ -6,29 +6,16 @@ import { button } from "@/components/variants";
 import DefaultLayout from "@/layouts/DefaultLayout.astro";
 ---
 
-<DefaultLayout>
+<DefaultLayout transition="slide">
     <h1 class="text-5xl font-medium text-center" transition:name="ingredients">
         Bahan-bahan buat Matcha Latte
     </h1>
 
-    <div
-        class="grid grid-cols-3 gap-4 md:gap-8"
-        id="ingredientImages"
-        data-aos-id="ingredient-images"
-        transition:name="images"
-    >
+    <div class="grid grid-cols-3 gap-4 md:gap-8" transition:name="images">
         {
-            ingredients.map((ingredient, index) => {
-                const aos = index % 2 == 0 ? "fade-up" : "fade-down";
-
+            ingredients.map((ingredient) => {
                 return (
-                    <div
-                        class="relative"
-                        data-aos={aos}
-                        data-aos-duration="500"
-                        data-aos-delay={(index + 1) * 500}
-                        data-ingredient-image
-                    >
+                    <div class="relative">
                         <Image
                             src={ingredient.image}
                             alt={ingredient.imageAlt}
@@ -52,9 +39,6 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
         <a
             href="/matcha-latte/steps/1"
             class={button()}
-            data-aos="fade-right"
-            data-aos-delay={ingredients.length * 500 + 500}
-            data-aos-anchor="ingredientImages"
             transition:name="action-button"
         >
             <span>Mari kita buat</span>
@@ -74,21 +58,3 @@ import DefaultLayout from "@/layouts/DefaultLayout.astro";
         </a>
     </div>
 </DefaultLayout>
-
-<script>
-    function removeAOS() {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-
-        if (urlSearchParams.get("visited") === "1") {
-            document.querySelectorAll(`[data-aos]`).forEach((element) => {
-                element.removeAttribute("data-aos");
-            });
-        }
-    }
-
-    removeAOS();
-
-    document.addEventListener("astro:after-swap", () => {
-        removeAOS();
-    });
-</script>

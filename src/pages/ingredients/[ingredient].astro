@@ -16,7 +16,7 @@ const { ingredient: id } = Astro.params;
 const ingredient = ingredients.find((_ingredient) => _ingredient.id === id)!;
 ---
 
-<DefaultLayout>
+<DefaultLayout transition="fade">
     <div>
         <a href="/matcha-latte/ingredients?visited=1" class={button()}>
             <span>Back</span>
